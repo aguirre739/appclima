@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Encabezado from "./components/Encabezado";
+import CardClima from "./components/CardClima";
+import Formulario from "./components/Formulario";
+import Footer from "./components/Footer";
 
 function App() {
+  const [resultado, setResultado] = useState({});
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Encabezado titulo="App del Clima"></Encabezado>
+      <section className="container">
+        <div className="row">
+          <div className="col-sm-12 col-md-6">
+            {
+              //object.entries devuelve un arreglo con las propiedades que tiene el objeto
+              Object.entries(resultado).length !== 0 ? (
+                <CardClima resultado={resultado}></CardClima>
+              ) : null
+            }
+          </div>
+          <div className="col-sm-12 col-md-6">
+            <Formulario setResultado={setResultado}></Formulario>
+          </div>
+        </div>
+      </section>
+      <Footer mensaje="&copy; Todos los derechos reservados."></Footer>
     </div>
   );
 }
