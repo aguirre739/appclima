@@ -11,6 +11,7 @@ const Formulario = (props) => {
   });
 
   const [error, setError] = useState(false);
+  const [mjError, setMjError] = useState("");
 
   const handleChange = (e) => {
     console.log(e.target.value);
@@ -28,6 +29,7 @@ const Formulario = (props) => {
       //mostrar un cartel que debe completar todos los campos
       console.log("aqui esta todo mal");
       setError(true);
+      setMjError("Todos los campos son obligatorios");
       return;
     }
     console.log("todo ok");
@@ -47,6 +49,7 @@ const Formulario = (props) => {
     if(respuesta.cod === "404"){
         //mostrar el mensaje de error 
         setError(true);
+        setMjError("No se encontró la ciudad ingresada");
         props.setResultado({});
     }else{
         setError(false);
@@ -54,14 +57,11 @@ const Formulario = (props) => {
     }
   };
 
-//   useEffect(() => {
-//     consultarApi();
-//   }, []);
 
   return (
     <Form onSubmit={handleSubmit}>
       {error === true ? (
-        <Alert variant={"danger"}>Todos los campos son obligatorios</Alert>
+        <Alert variant={"danger"}>{mjError}</Alert>
       ) : null}
       <Form.Group controlId="ciudad">
         <Form.Label className="text-white">Ciudad *</Form.Label>

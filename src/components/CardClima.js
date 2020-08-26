@@ -10,12 +10,9 @@ const CardClima = ({resultado}) => {
         const apikey = 'b4ba94e51e1819996a9d8eeb9dda02d1';
         const lat = resultado.coord.lat;
         const long = resultado.coord.lon;
-        console.log(lat,long);
         const url = `http://api.openweathermap.org/data/2.5/uvi?appid=${apikey}&lat=${lat}&lon=${long}`;
         const api = await fetch(url);
-        console.log(api);
         const respuesta = await api.json();
-        console.log(respuesta);
         setUV(respuesta.value);
     }
     obtenerCoord();
